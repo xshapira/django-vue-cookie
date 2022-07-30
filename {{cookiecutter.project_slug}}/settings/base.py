@@ -1,6 +1,7 @@
 """
 Base settings to build other settings file upon.
 """
+
 import environ
 from pathlib import Path
 
@@ -14,8 +15,7 @@ RESOURCES_DIR = ROOT_DIR / 'resources'
 
 env = environ.Env()
 
-READ_DOT_ENV_FILE = env.bool('APP_READ_DOT_ENV_FILE', default=False)
-if READ_DOT_ENV_FILE:
+if READ_DOT_ENV_FILE := env.bool('APP_READ_DOT_ENV_FILE', default=False):
     # OS environment variables take precedence over variables from .env
     env.read_env(str(ROOT_DIR / '.env'))
 
@@ -154,10 +154,8 @@ MEDIA_URL = "/media/"
 # https://docs.djangoproject.com/en/dev/ref/settings/#templates
 TEMPLATES = [
     {
-        # https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-TEMPLATES-BACKEND
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
-        'DIRS': [str('templates')],
+        'DIRS': ['templates'],
         'OPTIONS': {
             # https://docs.djangoproject.com/en/dev/ref/settings/#template-loaders
             # https://docs.djangoproject.com/en/dev/ref/templates/api/#loader-types
@@ -179,6 +177,7 @@ TEMPLATES = [
         },
     }
 ]
+
 
 
 # SECURITY

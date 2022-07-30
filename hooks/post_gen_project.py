@@ -49,9 +49,9 @@ def set_flag(file_path, flag, value=None, formatted=None, *args, **kwargs):
         random_string = generate_random_string(*args, **kwargs)
         if random_string is None:
             print(
-                "We couldn't find a secure pseudo-random number generator on your system. "
-                "Please, make sure to manually {} later.".format(flag)
+                f"We couldn't find a secure pseudo-random number generator on your system. Please, make sure to manually {flag} later."
             )
+
             random_string = flag
         if formatted is not None:
             random_string = formatted.format(random_string)
@@ -67,14 +67,13 @@ def set_flag(file_path, flag, value=None, formatted=None, *args, **kwargs):
 
 
 def set_django_secret_key(file_path):
-    django_secret_key = set_flag(
+    return set_flag(
         file_path,
         '!!!SET DJANGO_SECRET_KEY!!!',
         length=64,
         using_digits=True,
         using_ascii_letters=True,
     )
-    return django_secret_key
 
 
 def set_flags_in_envs():
@@ -90,7 +89,7 @@ def main():
     set_flags_in_envs()
     set_flags_in_settings_files()
 
-    print(SUCCESS + 'Project initialized, keep up the good work!' + TERMINATOR)
+    print(f'{SUCCESS}Project initialized, keep up the good work!{TERMINATOR}')
 
 
 if __name__ == '__main__':
